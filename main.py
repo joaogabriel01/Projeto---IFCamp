@@ -20,9 +20,13 @@ def login():
         proxima = ''
     return render_template('login.html', proxima=proxima)
 
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('navbar.html')
 
 @app.route('/autenticar',methods=['POST',])
 def autenticar():
