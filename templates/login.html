@@ -1,0 +1,33 @@
+<html>
+    <header>
+        <title>Login</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/estilos.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='bootstrap.css') }}">
+
+    </header>
+    <body>
+        <div class="container">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul id="messages" class="list-unstyled">
+                    {% for message in messages %}
+                        <li class="alert alert-danger">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div  class="full_size"  style="text-align: center">
+
+        <form id="form_login" class="form-control" method="POST" action="/autenticar">
+            <input type="hidden" name="proxima" value="{{proxima}}">
+            <label class="text_form">Nome de usuário:</label><input  class="form-control" type="text" name="usuario" required>
+            <label class="text_form">Senha:</label><input class="form-control" type="password" name="senha" required>
+            <button style="margin-top:2rem; width: 60%" class="btn btn-primary" type="submit">Logar</button>
+        </form>
+    </div>
+
+    </body>
+</html>

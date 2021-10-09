@@ -1,0 +1,19 @@
+.full_size {
+    height:100%;
+    width:100%;
+    background:grey;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+
+}
+
+#form_login {
+    margin:8rem;
+    width:50%;
+    padding:5rem;
+}
+
+.text_form{
+    padding:1rem;
+}
