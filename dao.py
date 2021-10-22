@@ -1,4 +1,4 @@
-from models import Usuario
+from models import Usuario, Campeonato
 #SQL_CRIA_CAMPEONATO = 'insert into tb_campeonatos(Nome, Premio, Data_Camp, idJogos) values (%s, %s, %s,%s)'
 SQL_CRIA_CAMPEONATO = 'insert into tb_campeonatos(Nome, Premio, idJogos) values (%s, %s, %s)'
 SQL_ATUALIZA_CAMPEONATO = 'UPDATE tb_campeonatos SET Nome=%s, Premio=%s, idJogos=%s where idCampeonato=%s'
@@ -8,13 +8,8 @@ class CampDao:
         self.__db=db
     def salvar(self,campeonato):
         cursor = self.__db.connection.cursor()
-
-        if(campeonato._id):
-            cursor.execute(SQL_ATUALIZA_CAMPEONATO, (campeonato._nome,campeonato._premio,campeonato._jogo,campeonato._id))
-        else:
-            cursor.execute(SQL_CRIA_CAMPEONATO, (campeonato._nome,campeonato._premio,campeonato._jogo))
-            cursor._id = cursor.lastrowid
-
+        cursor.execute(SQL_CRIA_CAMPEONATO, (campeonato._nome,campeonato._premio,campeonato._jogo))
+        cursor._id = cursor.lastrowid
         self.__db.connection.commit()
         return campeonato
 
@@ -43,4 +38,17 @@ class UserDao:
         dados = cursor.fetchone()
         usuario = self.traduz_usuario(dados) if dados else None
         return usuario
+
+SQL_CRIA_JOGO = 'insert into tb_jogos(Nome) values (%s)'
+class JogoDao:
+    def __init__(self,db):
+        self.__db=db
+    def criar(self,jogo):
+        cursor = self.__db.connection.cursor()
+
+        cursor.execute(SQL_CRIA_JOGO, (jogo._jogo,))
+        cursor._id = cursor.lastrowid
+
+        self.__db.connection.commit()
+        return jogo
 

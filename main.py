@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request,redirect,session, flash
 
-from dao import UserDao
+from dao import UserDao, CampDao, JogoDao
 from flask_mysqldb import MySQL
 
-from models import Usuario, Campeonato
+from models import Usuario, Campeonato, Jogo
 
 app = Flask(__name__)
 app.secret_key='LP2'
@@ -16,6 +16,9 @@ app.config['MYSQL_PORT'] = 3306
 
 db = MySQL(app)
 user_dao = UserDao(db)
+campeonato_dao = CampDao(db)
+jogo_dao = JogoDao(db)
+
 
 
 
@@ -62,6 +65,17 @@ def registrar_conta():
     print(usuario)
     user_dao.criar(usuario)
     return redirect('/')
+
+@app.route('/criar',methods=['POST'],)
+def criar():
+    nome = request.form['nome']
+    #arrumar o jogo, pois tem que receber uma string e inserir o id
+    jogo = request.form['jogo']
+    premio = request.form['premio']
+    campeonato = Campeonato(nome,premio,jogo)
+    campeonato_dao.salvar(campeonato)
+    return redirect('/')
+
 
 
 if __name__ == '__main__':

@@ -5,9 +5,13 @@ class Usuario:
         self._tipo = tipo
 
 class Campeonato:
-    def __init__(self,id,nome,premio,jogo,data):
-        self._id = id
+    def __init__(self,nome,premio,jogo,data=0):
+
         self._nome = nome
         self._premio = premio
         self._jogo = jogo
         self._data = data
+
+class Jogo:
+    def __init__(self,jogo):
+        self._jogo = jogo
