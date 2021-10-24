@@ -1,7 +1,8 @@
-from models import Usuario, Campeonato
+from models import Usuario, Campeonato, Transforma
 #SQL_CRIA_CAMPEONATO = 'insert into tb_campeonatos(Nome, Premio, Data_Camp, idJogos) values (%s, %s, %s,%s)'
 SQL_CRIA_CAMPEONATO = 'insert into tb_campeonatos(Nome, Premio, idJogos) values (%s, %s, %s)'
 SQL_ATUALIZA_CAMPEONATO = 'UPDATE tb_campeonatos SET Nome=%s, Premio=%s, idJogos=%s where idCampeonato=%s'
+SQL_BUSCA_CAMP = 'SELECT Nome, Premio, Data_Camp, idJogos from tb_campeonatos'
 
 class CampDao:
     def __init__(self,db):
@@ -12,6 +13,15 @@ class CampDao:
         cursor._id = cursor.lastrowid
         self.__db.connection.commit()
         return campeonato
+
+    def buscar_camp(self):
+        cursor = self.__db.connection.cursor()
+        cursor.execute(SQL_BUSCA_CAMP)
+        dados = cursor.fetchall()
+        print("dados = {}".format(dados))
+        dados = Transforma.transformaStr(dados)
+        print("dados = {}".format(dados))
+        return dados
 
 SQL_CRIA_USUARIO = 'insert into tb_usuarios(usuario, senha, tipo_usuario) values (%s, %s, %s)'
 SQL_ATUALIZA_SENHA_USUARIO= 'UPDATE tb_usuarios SET senha=%s where usuario=%s'
@@ -58,9 +68,9 @@ class JogoDao:
     def buscar_um(self,jogo):
         cursor = self.__db.connection.cursor()
         cursor.execute(SQL_BUSC_JOGO_1,(jogo))
-        dados = cursor.fetchall()
+        dados = cursor.fetchone()
         print(dados)
-        return 1
+        return dados
 
     def buscar(self):
         cursor = self.__db.connection.cursor()
@@ -72,5 +82,6 @@ class JogoDao:
         cursor = self.__db.connection.cursor()
         cursor.execute(SQL_BUSC_ID_JOGO,(nome,))
         dados = cursor.fetchone()
+
         return dados
 

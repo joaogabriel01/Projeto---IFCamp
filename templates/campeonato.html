@@ -1,0 +1,12 @@
+{% extends "template.html" %}
+{% block conteudo %}
+    {% for i in camp %}
+        <div class="container" style="background: #E0FFFF; margin-top:40px">
+            <h1>{{i.getNome()}}</h1>
+            <p>Premio: {{i.getPremio()}}</p>
+            <p>Jogo: {{i.getJogo()}}</p>
+            <p>Data do Jogo: {{i.getData()}}</p>
+            <a href="#">Se cadastrar</a>
+        </div>
+    {% endfor %}
+{%endblock %}
