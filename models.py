@@ -13,5 +13,6 @@ class Campeonato:
         self._data = data
 
 class Jogo:
-    def __init__(self,jogo):
+    def __init__(self,jogo,id=0):
         self._jogo = jogo
+        self._id = id

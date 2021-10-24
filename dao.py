@@ -24,7 +24,7 @@ class UserDao:
         cursor = self.__db.connection.cursor()
 
         cursor.execute(SQL_CRIA_USUARIO, (user._nome,user._senha,user._tipo))
-        cursor._id = cursor.lastrowid
+        # cursor._id = cursor.lastrowid
 
         self.__db.connection.commit()
         return user
@@ -39,16 +39,38 @@ class UserDao:
         usuario = self.traduz_usuario(dados) if dados else None
         return usuario
 
-SQL_CRIA_JOGO = 'insert into tb_jogos(Nome) values (%s)'
+SQL_CRIA_JOGO = 'INSERT INTO tb_jogos(Nome) SELECT %s FROM DUAL WHERE NOT EXISTS(SELECT Nome FROM tb_jogos WHERE Nome = %s)'
+SQL_BUSC_JOGO_1= 'SELECT idJogos, Nome from tb_jogos where idJogos=%s'
+SQL_BUSC_JOGO= 'SELECT idJogos, Nome from tb_jogos'
+SQL_BUSC_ID_JOGO= 'SELECT idJogos from tb_jogos where Nome=%s'
 class JogoDao:
     def __init__(self,db):
         self.__db=db
     def criar(self,jogo):
         cursor = self.__db.connection.cursor()
 
-        cursor.execute(SQL_CRIA_JOGO, (jogo._jogo,))
-        cursor._id = cursor.lastrowid
+        cursor.execute(SQL_CRIA_JOGO, (jogo._jogo,jogo._jogo,))
+        # cursor._id = cursor.lastrowid
 
         self.__db.connection.commit()
         return jogo
+
+    def buscar_um(self,jogo):
+        cursor = self.__db.connection.cursor()
+        cursor.execute(SQL_BUSC_JOGO_1,(jogo))
+        dados = cursor.fetchall()
+        print(dados)
+        return 1
+
+    def buscar(self):
+        cursor = self.__db.connection.cursor()
+        cursor.execute(SQL_BUSC_JOGO)
+        dados = cursor.fetchall()
+        return dados
+
+    def buscar_id(self,nome):
+        cursor = self.__db.connection.cursor()
+        cursor.execute(SQL_BUSC_ID_JOGO,(nome,))
+        dados = cursor.fetchone()
+        return dados
 

@@ -54,7 +54,8 @@ def autenticar():
 
 @app.route('/novo')
 def novo():
-    return render_template('novo.html')
+    jogos=jogo_dao.buscar()
+    return render_template('novo.html',jogos=jogos)
 
 @app.route('/registrar_conta',methods=['POST'],)
 def registrar_conta():
@@ -66,16 +67,29 @@ def registrar_conta():
     user_dao.criar(usuario)
     return redirect('/')
 
-@app.route('/criar',methods=['POST'],)
-def criar():
+@app.route('/criar_camp',methods=['POST'],)
+def criar_camp():
+
     nome = request.form['nome']
-    #arrumar o jogo, pois tem que receber uma string e inserir o id
     jogo = request.form['jogo']
+    jogo_id = jogo_dao.buscar_id(jogo)
+    jogo_id = jogo_id[0]
     premio = request.form['premio']
-    campeonato = Campeonato(nome,premio,jogo)
+    campeonato = Campeonato(nome,premio,jogo_id)
     campeonato_dao.salvar(campeonato)
     return redirect('/')
 
+@app.route('/novo_jogo')
+def novo_jogo():
+
+    return render_template('novo_jogo.html')
+
+@app.route('/cad_jogo', methods=['POST'],)
+def cad_jogo():
+    nome = request.form['nome']
+    jogo = Jogo(nome)
+    jogo_dao.criar(jogo)
+    return redirect('/')
 
 
 if __name__ == '__main__':
