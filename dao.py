@@ -72,16 +72,22 @@ class JogoDao:
         print(dados)
         return dados
 
+    def trduz_jogo(self,tupla):
+        return
+
+
     def buscar(self):
         cursor = self.__db.connection.cursor()
         cursor.execute(SQL_BUSC_JOGO)
         dados = cursor.fetchall()
         return dados
 
-    def buscar_id(self,nome):
+    def buscar_id_por_nome(self,nome):
         cursor = self.__db.connection.cursor()
         cursor.execute(SQL_BUSC_ID_JOGO,(nome,))
         dados = cursor.fetchone()
+        print(dados)
+        return dados[0]
 
-        return dados
+
 

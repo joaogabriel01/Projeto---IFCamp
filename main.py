@@ -72,8 +72,7 @@ def criar_camp():
 
     nome = request.form['nome']
     jogo = request.form['jogo']
-    jogo_id = jogo_dao.buscar_id(jogo)
-    jogo_id = jogo_id[0]
+    jogo_id = jogo_dao.buscar_id_por_nome(jogo)
     premio = request.form['premio']
     campeonato = Campeonato(nome,premio,jogo_id)
     campeonato_dao.salvar(campeonato)
