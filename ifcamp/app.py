@@ -1,12 +1,18 @@
 from flask import Flask, render_template, request,redirect,session, flash
 
-from dao import UserDao, CampDao, JogoDao
+from ifcamp.ext import configuration
+
+from ifcamp.dao import UserDao, CampDao, JogoDao
+from ifcamp.models import Usuario, Campeonato, Jogo
+
 from flask_mysqldb import MySQL
 
-from models import Usuario, Campeonato, Jogo
+
 
 app = Flask(__name__)
-app.secret_key='LP2'
+configuration.init_app(app)
+
+
 
 app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'

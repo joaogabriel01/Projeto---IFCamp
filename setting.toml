@@ -1,0 +1,3 @@
+[default]
+TITLE = 'CAMP'
+SECRET_KEY='LP2'

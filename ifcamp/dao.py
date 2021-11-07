@@ -1,4 +1,4 @@
-from models import Usuario, Campeonato, Transforma
+from ifcamp.models import Usuario, Campeonato, Transforma
 #SQL_CRIA_CAMPEONATO = 'insert into tb_campeonatos(Nome, Premio, Data_Camp, idJogos) values (%s, %s, %s,%s)'
 SQL_CRIA_CAMPEONATO = 'insert into tb_campeonatos(Nome, Premio, idJogos) values (%s, %s, %s)'
 SQL_ATUALIZA_CAMPEONATO = 'UPDATE tb_campeonatos SET Nome=%s, Premio=%s, idJogos=%s where idCampeonato=%s'
