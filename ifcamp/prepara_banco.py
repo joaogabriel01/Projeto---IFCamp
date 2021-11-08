@@ -8,30 +8,31 @@ conn.commit()
 
 #Descomente para criar o banco e suas tabelas
 criar_tabelas = '''
-    CREATE DATABASE db_Camp DEFAULT CHARSET=utf8;
-    USE `db_Camp`;
+    CREATE DATABASE db_Camp1 DEFAULT CHARSET=utf8;
+    USE `db_Camp1`;
     CREATE TABLE `tb_jogos` ( 
         `idJogos` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        `Nome` VARCHAR(45) NULL);
+        `nome` VARCHAR(45) NULL);
     CREATE TABLE `tb_campeonatos` ( 
         `idCampeonato` INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-        `Nome` VARCHAR(45) NOT NULL, `Premio` VARCHAR(45) NOT NULL, 
-        `Data_Criacao` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, 
-        `Data_Camp` DATETIME, 
+        `nome` VARCHAR(45) NOT NULL, 
+        `premio` INT NOT NULL, 
+        `dataCriacao` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+        `dataCamp` DATETIME, 
         `idJogos` INT NOT NULL, 
         FOREIGN KEY(`idJogos`) REFERENCES `tb_jogos`(`idJogos`) );
     CREATE TABLE `tb_usuarios` ( 
-
-        `usuario` VARCHAR(45) NOT NULL PRIMARY KEY, 
+        `idUsuario` INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+        `usuario` VARCHAR(45) NOT NULL, 
         `senha` VARCHAR(45) NOT NULL,
-        `tipo_usuario` INT NOT NULL);
+        `tipoUsuario` INT NOT NULL);
     CREATE TABLE `tb_times` ( 
         `idTime` INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
         `nome` VARCHAR(45) NULL);
     CREATE TABLE `tb_usuarios_times` ( 
-        `usuario` VARCHAR(45) NOT NULL , 
+        `idUsuario` INT NOT NULL , 
         `idTime` INT NOT NULL, 
-        FOREIGN KEY(`usuario`) REFERENCES tb_usuarios(usuario), 
+        FOREIGN KEY(`idUsuario`) REFERENCES tb_usuarios(idUsuario), 
         FOREIGN KEY(`idTime`) REFERENCES tb_times(idTime));
     CREATE TABLE `tb_campeonatos_times` ( 
         `idCampeonato` INT NOT NULL, `idTime` INT NOT NULL, 

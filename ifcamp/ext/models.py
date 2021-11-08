@@ -1,8 +1,18 @@
 class Usuario:
-    def __init__(self,nome,senha,tipo):
+    def __init__(self,iduser,nome,senha,tipo):
+        self._iduser = iduser
         self._nome = nome
         self._senha = senha
         self._tipo = tipo
+
+    def getID(self):
+        return self._iduser
+    def getNome(self):
+        return self._nome
+    def getSenha(self):
+        return self._senha
+    def getTipo(self):
+        return self._tipo
 
 class Campeonato:
     def __init__(self,nome,premio,jogo,data=0):

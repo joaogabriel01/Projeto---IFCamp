@@ -1,0 +1,13 @@
+{% extends "admin/template.html" %}
+{% block conteudo %}
+<form action="{{ url_for('realiza_atualizacao')}}" method="POST">
+    <input type="hidden" name = "id" value="{{id}}">
+    <label>Nome:</label>
+    <input type="text" name="nome">
+    <label>Senha:</label>
+    <input type="text" name="senha">
+    <label>Tipo:</label>
+    <input type="text" name="tipo">
+    <button>Alterar</button>
+</form>
+{%endblock %}

@@ -1,5 +1,5 @@
 Melhora o banco, acrescenta uma categoria pro jogo e uma tabela só pra essa categoria
-Arruma os arquivos de forma padrão
-Arruma os "traduz" de cada objeto se necessario
+Arruma os arquivos de forma padrão OK
+Arruma os "traduz" de cada objeto se necessario 
 Implementa a interface administradora
 Arruma os logins com senha
