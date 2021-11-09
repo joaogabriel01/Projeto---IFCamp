@@ -123,7 +123,8 @@ def admin_usuarios():
 
 @app.route('/admin/altera_usuario/<int:id>')
 def altera_usuario(id):
-    return render_template('admin/altera_usuario.html', id=id)
+    usuario = user_dao.buscar_um_user_pid(id)
+    return render_template('admin/altera_usuario.html', usuario=usuario)
 
 @app.route('/admin/realiza_atualizacao', methods=['POST'],)
 def realiza_atualizacao():

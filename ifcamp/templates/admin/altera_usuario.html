@@ -1,13 +1,13 @@
 {% extends "admin/template.html" %}
 {% block conteudo %}
 <form action="{{ url_for('realiza_atualizacao')}}" method="POST">
-    <input type="hidden" name = "id" value="{{id}}">
+    <input type="hidden" name = "id" value="{{usuario.getID()}}">
     <label>Nome:</label>
-    <input type="text" name="nome">
+    <input type="text" name="nome" value="{{usuario.getNome()}}">
     <label>Senha:</label>
-    <input type="text" name="senha">
+    <input type="text" name="senha" value="{{usuario.getSenha()}}">
     <label>Tipo:</label>
-    <input type="text" name="tipo">
+    <input type="text" name="tipo" value="{{usuario.getTipo()}}">
     <button>Alterar</button>
 </form>
 {%endblock %}

@@ -28,6 +28,7 @@ SQL_ATUALIZA_SENHA_USUARIO= 'UPDATE tb_usuarios SET senha=%s where usuario=%s'
 SQL_ATUALIZA_USUARIO = 'UPDATE tb_usuarios SET usuario=%s, senha=%s, tipoUsuario=%s where idUsuario=%s'
 SQL_UM_USUARIO= 'SELECT idUsuario, usuario, senha, tipoUsuario from tb_usuarios where usuario=%s'
 SQL_TODOS_USUARIOS = 'SELECT idUsuario, usuario,senha,tipoUsuario from tb_usuarios'
+SQL_BUSCA_USUARIO_ID = 'SELECT idUsuario, usuario, senha, tipoUsuario from tb_usuarios where idUsuario=%s'
 
 class UserDao:
     def __init__(self,db):
@@ -60,6 +61,13 @@ class UserDao:
     def buscar_um(self,usuario):
         cursor = self.__db.connection.cursor()
         cursor.execute(SQL_UM_USUARIO,(usuario,))
+        dados = cursor.fetchone()
+        
+        usuario = self.traduz_usuario(dados) if dados else None
+        return usuario
+    def buscar_um_user_pid(self,id):
+        cursor = self.__db.connection.cursor()
+        cursor.execute(SQL_BUSCA_USUARIO_ID,(id,))
         dados = cursor.fetchone()
         
         usuario = self.traduz_usuario(dados) if dados else None
