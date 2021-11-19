@@ -1,7 +1,7 @@
 {% extends "template.html" %}
 {% block conteudo %}
     {% for i in camp %}
-        <div class="container" style="background: #E0FFFF; margin-top:40px">
+        <div class="container rounded" style="background: #dcdcdc; margin-top:40px; padding:40px">
             <h1>{{i.getNome()}}</h1>
             <p>Premio: {{i.getPremio()}}</p>
             <p>Jogo: {{i.getJogo()}}</p>

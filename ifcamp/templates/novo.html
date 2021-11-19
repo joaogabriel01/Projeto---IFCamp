@@ -1,6 +1,6 @@
 {% extends "template.html" %}
 {% block conteudo %}
-    <div class="container" style="background: #E0FFFF; margin-top:40px">
+    <div class="container rounded" style="background: #dcdcdc; margin-top:40px; padding:20px;">
       <form action="/criar_camp" method="post">
         <fieldset>
           <div class="form-group" style="margin-top:10px">
@@ -24,7 +24,7 @@
             <label>Data do Campeonato</label>
             <input type="text" name="data_campeonato" class="form-control">
           </div>
-          <div style="margin:10px 0 10px">
+          <div style="margin:20px 0 10px">
             <button type="submit" class="btn btn-primary btn-salvar" >Salvar</button>
           </div>
 

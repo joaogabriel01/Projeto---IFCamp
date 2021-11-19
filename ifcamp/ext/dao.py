@@ -29,6 +29,7 @@ SQL_ATUALIZA_USUARIO = 'UPDATE tb_usuarios SET usuario=%s, senha=%s, tipoUsuario
 SQL_UM_USUARIO= 'SELECT idUsuario, usuario, senha, tipoUsuario from tb_usuarios where usuario=%s'
 SQL_TODOS_USUARIOS = 'SELECT idUsuario, usuario,senha,tipoUsuario from tb_usuarios'
 SQL_BUSCA_USUARIO_ID = 'SELECT idUsuario, usuario, senha, tipoUsuario from tb_usuarios where idUsuario=%s'
+SQL_EXCLUIR_USUARIO = 'DELETE FROM tb_usuarios WHERE idUsuario=%s'
 
 class UserDao:
     def __init__(self,db):
@@ -80,6 +81,14 @@ class UserDao:
         # print(dados)
         usuarios = self.traduz_usuarios(dados) if dados else None
         return usuarios
+
+    def excluir_usuario(self,id):
+        cursor = self.__db.connection.cursor()
+        cursor.execute(SQL_EXCLUIR_USUARIO,(id,))
+        self.__db.connection.commit()
+        return 1
+
+
 
 SQL_CRIA_JOGO = 'INSERT INTO tb_jogos(Nome) SELECT %s FROM DUAL WHERE NOT EXISTS(SELECT Nome FROM tb_jogos WHERE Nome = %s)'
 SQL_BUSC_JOGO_1= 'SELECT idJogos, Nome from tb_jogos where idJogos=%s'

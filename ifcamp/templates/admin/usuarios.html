@@ -8,18 +8,22 @@
         <td>Senha</td>
         <td>Tipo</td>
         <td>Editar</td>
+        <td>Excluir</td>
       </tr>
 
       {% for i in usuarios %}
+        
         <tr>
           <td>{{i.getID()}}</td>
           <td>{{i.getNome()}}</td>
           <td>{{i.getSenha()}}</td>
           <td>{{i.getTipo()}}</td>
           <td><a href="{{url_for('altera_usuario', id=i.getID())}}">Editar</a></td>
+          <td><a href="{{url_for('excluir_usuario', id=i.getID())}}">Excluir</a></td>
         </tr>
         
       {% endfor %}
+
 
     </table>
 

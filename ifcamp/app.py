@@ -119,6 +119,8 @@ def admin():
 def admin_usuarios():
     usuarios = user_dao.buscar_todos()
     print(usuarios)
+    if usuarios is None:
+        usuarios = []
     return render_template('admin/usuarios.html', usuarios = usuarios)
 
 @app.route('/admin/altera_usuario/<int:id>')
@@ -136,6 +138,11 @@ def realiza_atualizacao():
     print(nome)
     usuario = Usuario(id_user,nome,senha,tipo)
     user_dao.atualiza(usuario)
+    return redirect('/admin')
+
+@app.route('/admin/excluir_usuario/<int:id>')
+def excluir_usuario(id):
+    user_dao.excluir_usuario(id)
     return redirect('/admin')
 
 if __name__ == '__main__':
