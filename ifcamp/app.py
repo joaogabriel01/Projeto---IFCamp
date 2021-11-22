@@ -103,13 +103,18 @@ def cad_jogo():
 @app.route('/campeonato')
 def campeonato():
     camp = []
+    jogos = []
     dados = campeonato_dao.buscar_camp()
     for i in dados:
         jogo = jogo_dao.buscar_um(i[3])
         jogo=jogo[1]
         camp.append(Campeonato(i[0],i[1],jogo,i[2]))
 
-    return render_template('campeonato.html',camp = camp)
+    dados = jogo_dao.buscar()
+    for i in dados:
+        jogos.append(i)
+
+    return render_template('campeonato.html',camp = camp, jogos=jogos)
 
 @app.route('/admin')
 def admin():

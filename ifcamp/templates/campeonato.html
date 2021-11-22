@@ -1,12 +1,47 @@
 {% extends "template.html" %}
 {% block conteudo %}
-    {% for i in camp %}
-        <div class="container rounded" style="background: #dcdcdc; margin-top:40px; padding:40px">
-            <h1>{{i.getNome()}}</h1>
-            <p>Premio: {{i.getPremio()}}</p>
-            <p>Jogo: {{i.getJogo()}}</p>
-            <p>Data do Jogo: {{i.getData()}}</p>
-            <a href="#">Se cadastrar</a>
+
+<style>
+    #sidebar-nav {
+    width: 160px;
+}
+</style>
+        
+            <div class="container-fluid " style="width:120px; float: left; margin-top: 40px;">
+                <div class="row flex-nowrap">
+                    <div class="col-auto px-0">
+                        <div id="sidebar" class="collapse collapse-horizontal show border-end" >
+                            <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start mg">
+                                <span class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar" style="background-color: #0069d9; color: white; border: 3px;">JOGOS:</span>
+                                {%for i in jogos%}
+                                <div class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar" style="background-color: #d6d6d6;">
+                                    <input class="form-check-input" type="checkbox" name="jogo" id="{{i[1]}}">
+                                    <label class="form-check-label" for="{{i[1]}}">{{i[1]}}</label>
+                                </div>
+                                {%endfor%}
+                               
+                            </div>
+        
+                        </div>
+                    </div> 
+                </div>
+            </div>
         </div>
+
+        
+
+
+        
+        {% for i in camp %}
+            <div class="container rounded" style="background: #d6d6d6; margin-top:40px; padding:40px; width: 70%;">
+                <h1>{{i.getNome()}}</h1>
+                <p>Premio: {{i.getPremio()}}</p>
+                <p>Jogo: {{i.getJogo()}}</p>
+                <p>Data do Jogo: {{i.getData()}}</p>
+                <button class="btn btn-primary" style="background: #0069d9;">Se Cadastrar</button>
+            </div>
+        
+
+    </div>
     {% endfor %}
 {%endblock %}
