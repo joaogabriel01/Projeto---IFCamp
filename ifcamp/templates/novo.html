@@ -1,5 +1,10 @@
 {% extends "template.html" %}
 {% block conteudo %}
+
+<script>
+  document.querySelector('.link-novo').classList.add("active");
+</script>
+
     <div class="container rounded" style="background: #dcdcdc; margin-top:40px; padding:20px;">
       <form action="/criar_camp" method="post">
         <fieldset>

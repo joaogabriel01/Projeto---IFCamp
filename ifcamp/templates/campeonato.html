@@ -1,6 +1,10 @@
 {% extends "template.html" %}
 {% block conteudo %}
 
+<script>
+    document.querySelector('.link-campeonatos').classList.add("active");
+</script>
+
 <style>
     #sidebar-nav {
     width: 160px;
@@ -26,7 +30,7 @@
                     </div> 
                 </div>
             </div>
-        </div>
+        
 
         
 
@@ -35,10 +39,11 @@
         {% for i in camp %}
             <div class="container rounded" style="background: #d6d6d6; margin-top:40px; padding:40px; width: 70%;">
                 <h1>{{i.getNome()}}</h1>
+                <hr>
                 <p>Premio: {{i.getPremio()}}</p>
                 <p>Jogo: {{i.getJogo()}}</p>
                 <p>Data do Jogo: {{i.getData()}}</p>
-                <button class="btn btn-primary" style="background: #0069d9;">Se Cadastrar</button>
+                <button class="btn btn-primary btn-block">Se Cadastrar</button>
             </div>
         
 
