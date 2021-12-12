@@ -6,24 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Bootstrap CSS -->
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='bootstrap.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
 <body style="width: 100%; height: 100%; background: linear-gradient(rgba(26, 25, 25, 0.95),rgba(26, 25, 25, 0.95)), url(../static/lol.jpg) no-repeat fixed">
     <nav class="navbar navbar-expand-lg navbar-dark" style="background:#0069d9; border:2px solid #0063ce">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><h1 style="color: black; font-family:sans-serif;">IFCamp</h1></a>
+
+            <a class="navbar-brand" href="/"><h1 style="color: rgb(255, 255, 255); font-family: 'Orbitron', sans-serif;">IFCamp</h1></a>
+
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mob-navbar" aria-label="Toggle">
             <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="mob-navbar">
-                <ul class="navbar-nav mb-2 mb-lg-0 mx-auto">
+            <div class="collapse navbar-collapse" id="mob-navbar" style="font-family: 'Roboto', sans-serif;">
+                <ul class="navbar-nav mb-2 mb-lg-0 mx-auto h2">
                     <li class="nav-item">
-                        <a class="nav-link link-home" aria-current="page" href="/">Home</a>
+                        <a class="nav-link link-home" aria-current="page" href="/"><strong>Home</strong></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-campeonatos" href="campeonato">Campeonatos</a>
+                        <a class="nav-link link-campeonatos" href="campeonato"><strong>Campeonatos</strong></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-novo" href="novo">Novo Campeonato</a>
+                        <a class="nav-link link-novo" href="novo"><strong>Novo Campeonato</strong></a>
                     </li>
 
                 </ul>
