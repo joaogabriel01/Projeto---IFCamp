@@ -61,7 +61,7 @@ def registrar_conta():
     senha = request.form['senha']
 
     # Coloco id 0 porque não vai fazer diferença
-    usuario = Usuario(0, nome, senha,2)
+    usuario = Usuario(0, nome, senha,1)
     print(usuario)
     user_dao.criar(usuario)
     return redirect('/')

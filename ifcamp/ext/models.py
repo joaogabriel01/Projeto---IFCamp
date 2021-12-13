@@ -15,12 +15,13 @@ class Usuario:
         return self._tipo
 
 class Campeonato:
-    def __init__(self,nome,premio,jogo,data=0):
+    def __init__(self,nome,premio,jogo,data=0,status=1):
 
         self._nome = nome
         self._premio = premio
         self._jogo = jogo
         self._data = data
+        self._status = status
 
     def getNome(self):
         return self._nome
@@ -30,11 +31,14 @@ class Campeonato:
         return self._jogo
     def getData(self):
         return self._data
+    def getStatus(self):
+        return self._status
 
 class Jogo:
-    def __init__(self,jogo,id=0):
+    def __init__(self,jogo,status=1,id=0):
         self._jogo = jogo
         self._id = id
+        self._status = status
 
 class Transforma:
     @staticmethod

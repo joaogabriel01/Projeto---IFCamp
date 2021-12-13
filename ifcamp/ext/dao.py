@@ -1,6 +1,6 @@
 from ifcamp.ext.models import Usuario, Campeonato, Transforma
-SQL_CRIA_CAMPEONATO = 'insert into tb_campeonatos(nome, premio, idJogos) values (%s, %s, %s)'
-SQL_ATUALIZA_CAMPEONATO = 'UPDATE tb_campeonatos SET nome=%s, premio=%s, idJogos=%s where idCampeonato=%s'
+SQL_CRIA_CAMPEONATO = 'insert into tb_campeonatos(nome, premio, idJogos,idStatus) values (%s, %s, %s,1)'
+SQL_ATUALIZA_CAMPEONATO = 'UPDATE tb_campeonatos SET nome=%s, premio=%s, idJogos=%s, idStatus=%s where idCampeonato=%s'
 SQL_BUSCA_CAMP = 'SELECT nome, premio, dataCamp, idJogos from tb_campeonatos'
 
 class CampDao:
@@ -23,12 +23,12 @@ class CampDao:
         return dados
 
 
-SQL_CRIA_USUARIO = 'INSERT INTO tb_usuarios(usuario, senha, tipoUsuario ) SELECT %s, %s, %s FROM DUAL WHERE NOT EXISTS(SELECT usuario FROM tb_usuarios WHERE usuario = %s)'
+SQL_CRIA_USUARIO = 'INSERT INTO tb_usuarios(usuario, senha, idTipoUsuario ) SELECT %s, %s, %s FROM DUAL WHERE NOT EXISTS(SELECT usuario FROM tb_usuarios WHERE usuario = %s)'
 SQL_ATUALIZA_SENHA_USUARIO= 'UPDATE tb_usuarios SET senha=%s where usuario=%s'
-SQL_ATUALIZA_USUARIO = 'UPDATE tb_usuarios SET usuario=%s, senha=%s, tipoUsuario=%s where idUsuario=%s'
-SQL_UM_USUARIO= 'SELECT idUsuario, usuario, senha, tipoUsuario from tb_usuarios where usuario=%s'
-SQL_TODOS_USUARIOS = 'SELECT idUsuario, usuario,senha,tipoUsuario from tb_usuarios'
-SQL_BUSCA_USUARIO_ID = 'SELECT idUsuario, usuario, senha, tipoUsuario from tb_usuarios where idUsuario=%s'
+SQL_ATUALIZA_USUARIO = 'UPDATE tb_usuarios SET usuario=%s, senha=%s, idTipoUsuario=%s where idUsuario=%s'
+SQL_UM_USUARIO= 'SELECT idUsuario, usuario, senha, idTipoUsuario from tb_usuarios where usuario=%s'
+SQL_TODOS_USUARIOS = 'SELECT idUsuario, usuario,senha,idTipoUsuario from tb_usuarios'
+SQL_BUSCA_USUARIO_ID = 'SELECT idUsuario, usuario, senha, idTipoUsuario from tb_usuarios where idUsuario=%s'
 SQL_EXCLUIR_USUARIO = 'DELETE FROM tb_usuarios WHERE idUsuario=%s'
 
 class UserDao:
@@ -90,7 +90,7 @@ class UserDao:
 
 
 
-SQL_CRIA_JOGO = 'INSERT INTO tb_jogos(Nome) SELECT %s FROM DUAL WHERE NOT EXISTS(SELECT Nome FROM tb_jogos WHERE Nome = %s)'
+SQL_CRIA_JOGO = 'INSERT INTO tb_jogos(Nome,idStatus) SELECT %s,1 FROM DUAL WHERE NOT EXISTS(SELECT Nome FROM tb_jogos WHERE Nome = %s)'
 SQL_BUSC_JOGO_1= 'SELECT idJogos, Nome from tb_jogos where idJogos=%s'
 SQL_BUSC_JOGO= 'SELECT idJogos, Nome from tb_jogos'
 SQL_BUSC_ID_JOGO= 'SELECT idJogos from tb_jogos where Nome=%s'
