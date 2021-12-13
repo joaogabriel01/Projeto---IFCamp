@@ -45,9 +45,14 @@
                     <p>Jogo: {{i.getJogo()}}</p>
                     <p>Data do Jogo: {{i.getData()}}</p>
                 </div>
-
-                <button class="btn btn-primary btn-block">Cadastrar-se</button>
+                
+                <form method="POST" action="cadastrar_time">
+                    <input type="text" name="id" hidden value="{{i.getId()}}">
+                    <input type="number" name="qtd" hidden value="{{i.getQtdJogTime()}}">
+                    <button class="btn btn-primary btn-block" type="submit">Cadastrar-se</button>
+                </form>
             </div>
+            
         
 
     </div>

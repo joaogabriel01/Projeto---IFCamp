@@ -1,8 +1,9 @@
+from datetime import time
 from flask import Flask, render_template, request,redirect,session, flash
 
 
-from ifcamp.ext.dao import UserDao, CampDao, JogoDao
-from ifcamp.ext.models import Usuario, Campeonato, Jogo
+from ifcamp.ext.dao import TimeCampDao, TimeDao, UserDao, CampDao, JogoDao
+from ifcamp.ext.models import Time, Usuario, Campeonato, Jogo
 
 from flask_mysqldb import MySQL
 
@@ -25,6 +26,8 @@ db = MySQL(app)
 user_dao = UserDao(db)
 campeonato_dao = CampDao(db)
 jogo_dao = JogoDao(db)
+time_dao = TimeDao(db)
+time_camp_dao = TimeCampDao(db)
 
 
 
@@ -82,9 +85,13 @@ def criar_camp():
 
     nome = request.form['nome']
     jogo = request.form['jogo']
+    qtd = request.form['qtd_jogadores']
+    data = request.form['data_campeonato']
+    data = data + ' 9:00:00'
     jogo_id = jogo_dao.buscar_id_por_nome(jogo)
     premio = request.form['premio']
-    campeonato = Campeonato(nome,premio,jogo_id)
+    campeonato = Campeonato(nome,premio,jogo_id,qtd,data)
+    print(campeonato.getData())
     campeonato_dao.salvar(campeonato)
     return redirect('/')
 
@@ -106,15 +113,45 @@ def campeonato():
     jogos = []
     dados = campeonato_dao.buscar_camp()
     for i in dados:
-        jogo = jogo_dao.buscar_um(i[3])
+        jogo = jogo_dao.buscar_um(i[4])
         jogo=jogo[1]
-        camp.append(Campeonato(i[0],i[1],jogo,i[2]))
+        camp.append(Campeonato(i[0],i[1],i[2],jogo,i[3],i[5]))
 
     dados = jogo_dao.buscar()
     for i in dados:
         jogos.append(i)
 
     return render_template('campeonato.html',camp = camp, jogos=jogos)
+
+@app.route('/cadastrar_time', methods=['POST'],)
+def cadastrar_time():
+    id = request.form['id']
+    qtd = request.form['qtd']
+    print(qtd)
+
+    return render_template('cadastrar_time.html',qtd = int(qtd),id = int(id))
+
+@app.route('/registra_time',methods=['POST'],)
+def registra_time():
+    nome = request.form['nomeTime']
+    id_camp = request.form['idcamp']
+
+    jogadores = []
+    for i in request.form:
+        jogadores.append(request.form[i])
+    del[jogadores[0]]
+    del[jogadores[0]]
+    time = Time(1,nome,jogadores)
+    time_dao.criar(time)
+    time_dao.insere_jogadores(time)
+
+    time_camp_dao.criar(time,id_camp)
+
+
+
+    return render_template('sucesso.html')
+    # time = Time(1,nome,)
+
 
 @app.route('/admin')
 def admin():
@@ -127,6 +164,7 @@ def admin_usuarios():
     if usuarios is None:
         usuarios = []
     return render_template('admin/usuarios.html', usuarios = usuarios)
+
 
 @app.route('/admin/altera_usuario/<int:id>')
 def altera_usuario(id):
@@ -155,3 +193,62 @@ if __name__ == '__main__':
 
 
 
+@app.route('/admin/jogos')
+def admin_jogos():
+    jogos_dados = jogo_dao.buscar()
+
+    jogos = []
+    for i in jogos_dados:
+        jogo = Jogo(i[1],i[2],i[0])
+        jogos.append(jogo)
+    if jogos is None:
+        jogos = []
+    print(jogos_dados)
+    print(jogos)
+    return render_template('admin/jogos.html', jogos = jogos)
+    
+@app.route('/admin/altera_jogo/<int:id>')
+def altera_jogo(id):
+    jogo = jogo_dao.buscar_um(id)
+    print(jogo)
+    novo_jogo = Jogo(jogo[1],jogo[2],jogo[0])
+    return render_template('admin/altera_jogo.html', jogo=novo_jogo)
+
+@app.route('/admin/realiza_atualizacao_jogo', methods=['POST'],)
+def realiza_atualizacao_jogo():
+    id_jogo = request.form['id']
+    nome = request.form['nome']
+    status = request.form['status']
+    jogo = Jogo(nome,status,id_jogo)
+    jogo_dao.atualiza(jogo)
+    return redirect('/admin')
+
+@app.route('/admin/excluir_jogo/<int:id>')
+def excluir_jogo(id):
+    jogo_dao.excluir_jogo_id(id)
+    return redirect('/admin')
+
+
+@app.route('/admin/campeonatos')
+def admin_campeonatos():
+    camp = []
+    dados = campeonato_dao.buscar_camp()
+    
+
+    for i in dados:
+        jogo = jogo_dao.buscar_um(i[4])
+        jogo=jogo[1]
+        camp.append(Campeonato(i[0],i[1],i[2],jogo,i[3],i[5]))
+
+    return render_template('admin/campeonatos.html', camp = camp)
+    
+@app.route('/admin/altera_campeonato/<int:id>')
+def altera_campeonato(id):
+    camp = campeonato_dao.buscar_um_camp(id)
+    editar_camp = Campeonato(camp[0],camp[1],camp[2],camp[4],camp[3],camp[5])
+    return render_template('admin/altera_campeonato.html', camp=editar_camp)
+
+@app.route('/admin/excluir_campeonato/<int:id>')
+def excluir_campeonato(id):
+    campeonato_dao.excluir_camp(id)
+    return redirect('/admin')

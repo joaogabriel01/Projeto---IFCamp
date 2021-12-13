@@ -1,0 +1,12 @@
+{% extends "admin/template.html" %}
+{% block conteudo %}
+<form action="{{ url_for('realiza_atualizacao')}}" method="POST">
+    <input type="hidden" name = "id" value="{{camp.getId()}}">
+    <label>Nome:</label>
+    <input type="text" name="nome" value="{{camp.getNome()}}">
+    <label>Status:</label>
+    <input type="text" name="status" value="{{camp.getStatus()}}">
+    <button>Alterar</button>
+    <p>OBS:Para o campeonato estar disponível, o status precisa estar como 2</p>
+</form>
+{%endblock %}

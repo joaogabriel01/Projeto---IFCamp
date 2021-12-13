@@ -1,0 +1,12 @@
+{% extends "admin/template.html" %}
+{% block conteudo %}
+<form action="{{ url_for('realiza_atualizacao_jogo')}}" method="POST">
+    <input type="hidden" name = "id" value="{{jogo.getId()}}">
+    <label>Nome:</label>
+    <input type="text" name="nome" value="{{jogo.getJogo()}}">
+    <label>Status:</label>
+    <input type="text" name="status" value="{{jogo.getStatus()}}">
+    <button>Alterar</button>
+    <p>OBS:Para o jogo estar disponível, o status precisa estar como 2</p>
+</form>
+{%endblock %}

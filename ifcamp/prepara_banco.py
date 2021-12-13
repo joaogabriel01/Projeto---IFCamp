@@ -26,6 +26,7 @@ criar_tabelas = '''
         `dataCamp` DATETIME, 
         `idJogos` INT NOT NULL, 
         `idStatus` INT NOT NULL,
+        `qtdJogTime` INT NOT NULL,
         FOREIGN KEY(`idJogos`) REFERENCES `tb_jogos`(`idJogos`),
         FOREIGN KEY(`idStatus`) REFERENCES `tb_status`(`idStatus`) );
     CREATE TABLE `tb_tipo_usuario` (

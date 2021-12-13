@@ -14,13 +14,23 @@ class Usuario:
     def getTipo(self):
         return self._tipo
 
-class Campeonato:
-    def __init__(self,nome,premio,jogo,data=0,status=1):
+class Time:
+    def __init__(self,id,nome,jogadores):
+        self._id = id
+        self._nome = nome
 
+        self._jogadores = jogadores
+
+
+
+class Campeonato:
+    def __init__(self,id,nome,premio,jogo,qtdJogTime=5,data="",status=1):
+        self._id = id
         self._nome = nome
         self._premio = premio
         self._jogo = jogo
         self._data = data
+        self._qtdJogTime = qtdJogTime
         self._status = status
 
     def getNome(self):
@@ -33,12 +43,24 @@ class Campeonato:
         return self._data
     def getStatus(self):
         return self._status
+    def getId(self):
+        return self._id
+    def getQtdJogTime(self):
+        return self._qtdJogTime
+        
 
 class Jogo:
-    def __init__(self,jogo,status=1,id=0):
+    def __init__(self,jogo,status=1,id_jogo=0):
         self._jogo = jogo
-        self._id = id
+        self._id = id_jogo
         self._status = status
+
+    def getJogo(self):
+        return self._jogo
+    def getId(self):
+        return self._id
+    def getStatus(self):
+        return self._status
 
 class Transforma:
     @staticmethod

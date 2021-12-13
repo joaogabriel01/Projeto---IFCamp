@@ -1,0 +1,27 @@
+{% extends "template.html" %}
+{% block conteudo %}
+<div class="container rounded" style="background: #d6d6d6; margin-top:40px; padding:40px; width: 70%;">
+    <h3>Criar e Cadastrar Time</h3>
+    <form method="POST" action="registra_time">
+        <fieldset>
+        <div>
+            <input type="text" name="idcamp" value="{{id}}" hidden>
+        </div>
+        <div class="form-group m-2 h6"> 
+            <label for="nomeTime">Nome do Time</label>
+            <input type="text" name="nomeTime"  class="form-control">
+        </div>
+
+
+            {% for i in range(qtd) %}
+                <div class="form-group m-4">            
+                    <label for="">ID do integrante Nº{{i+1}}</label>
+                    <input type="text" class="form-control" name="{{i+1}}">
+                </div>
+
+            {% endfor %}
+            <button class="btn btn-primary btn-block mt-2" type="submit">Cadastrar</button>
+        </fieldset>
+    </form>
+</div>
+{%endblock %}
